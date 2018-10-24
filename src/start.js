@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Hello from './hello';
 
-ReactDOM.render(
-    <HelloWorld />,
-    document.querySelector('main')
-);
-
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
+if(location.pathname === '/welcome') {
+    ReactDOM.render(
+        <Hello />,
+        document.querySelector('main')
+    );
+} else {
+    ReactDOM.render(
+        <div><h1>Bio</h1></div>,
+        document.querySelector('main')
     );
 }
