@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './hello';
+import { Welcome } from './welcome.js';
 
 if(location.pathname === '/welcome') {
     ReactDOM.render(
-        <Hello />,
+        <Welcome />,
         document.querySelector('main')
     );
 } else {
     ReactDOM.render(
-        <div><h1>Bio</h1></div>,
+        <img src="/fakebook.png" style={{width:"250px"}} />,
         document.querySelector('main')
     );
 }

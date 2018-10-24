@@ -3,6 +3,8 @@ const app = express();
 const compression = require('compression');
 const csurf = require('csurf');
 const cookieSession = require('cookie-session');
+const db = require('./database.js');
+const bodyParser = require('body-parser');
 
 app.use(compression());
 
@@ -22,18 +24,21 @@ app.use(cookieSession({
     maxAge: 1000 * 60 * 60 * 24 * 14
 }));
 
+app.use(bodyParser.json());
 app.use(require('body-parser').urlencoded({extended: false}));
 
-app.use(csurf());
+// app.use(csurf());
+//
+// app.use(function(req, res, next) {
+//     res.locals.csrfToken = req.csrfToken();
+//     next();
+// });
 
-app.use(function(req, res, next) {
-    res.locals.csrfToken = req.csrfToken();
-    next();
-});
+app.use(express.static('public'));
 
 app.get('/welcome', function(req, res) {
     if(req.session.userId) {
-        res.redirect('/bio');
+        res.redirect('/');
     } else {
         res.sendFile(__dirname + '/index.html');
     }
@@ -45,6 +50,19 @@ app.get('*', function(req, res) {
     } else {
         res.sendFile(__dirname + '/index.html');
     }
+});
+
+app.post('/register', function(req, res) {
+    console.log(req.body);
+    db.hashPassword(req.body.password)
+    .then(hash => {
+        return db.registerUser(req.body.firstname, req.body.lastname, req.body.email, hash)
+        .then(results => {
+            req.session.userId = results[0].id;
+            res.json({success:true});
+        })
+    })
+    .catch(err => {console.log(err)});
 });
 
 app.listen(8080, function() {

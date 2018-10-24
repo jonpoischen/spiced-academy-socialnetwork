@@ -18,12 +18,12 @@ export default class Hello extends React.Component {
     logProps() {
         console.log(
             this.props
-        )
+        );
     }
     changeGreeteeToKitty() {
         this.setState({
             greetee: 'Kitty'
-        })
+        });
     }
     render() {
         return (
