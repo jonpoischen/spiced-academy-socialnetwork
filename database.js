@@ -9,13 +9,13 @@ exports.registerUser = function (firstname, lastname, email, hashedpw) {
         INSERT INTO users
         (first, last, email, password)
         VALUES ($1, $2, $3, $4)
-        returning *;
+        RETURNING *;
         `,
-        [firstname, lastname, email, hashedpw]
+    [firstname, lastname, email, hashedpw]
     )
-    .then(function (results) {
-        return results.rows;
-    });
+        .then(function (results) {
+            return results.rows;
+        });
 };
 
 exports.hashPassword = function(plainTextPassword) {
@@ -32,4 +32,34 @@ exports.hashPassword = function(plainTextPassword) {
             });
         });
     });
+};
+
+exports.showHashPw = function (email) {
+    return db.query(`SELECT password FROM users WHERE email = $1`, [email])
+        .then(function(result) {
+            return result.rows[0] && result.rows[0].password;
+        })
+        .catch(function(err) {console.log(err);});
+};
+
+exports.checkPassword = function(textEnteredInLoginForm, hashedPasswordFromDatabase) {
+    return new Promise(function(resolve, reject) {
+        bcrypt.compare(textEnteredInLoginForm, hashedPasswordFromDatabase, function(err, doesMatch) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(doesMatch);
+            }
+        });
+    });
+};
+
+exports.getLoginId = function (email) {
+    return db.query(`SELECT id FROM users WHERE email = $1`, [email])
+        .then(function(result) {
+            return result.rows[0].id;
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
