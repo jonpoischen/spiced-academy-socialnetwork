@@ -63,3 +63,26 @@ exports.getLoginId = function (email) {
             console.log(err);
         });
 };
+
+exports.uploadImages = function(url, id) {
+    return db.query (
+        `UPDATE users
+        SET img_url =$1
+        WHERE id = $2
+        returning *;`,
+        [url, id]
+    )
+        .then(function (results) {
+            return results.rows;
+        });
+};
+
+exports.getUserById = function(id) {
+    return db.query(
+        `SELECT first, last, img_url, bio, id
+        FROM users
+        WHERE id = $1;
+        `,
+        [id]
+    );
+};

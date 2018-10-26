@@ -38,7 +38,7 @@ export default class Login extends React.Component {
     render() {
         return (
             <div className="formcontainer extrapadding">
-                <button className="loginregisterbutton"><Link to="/" style={{ textDecoration: 'none' }}>Sign Up</Link></button>
+                <Link to="/" className="loginregisterbutton" style={{ textDecoration: 'none' }}>Sign Up</Link>
                 <div className="loginbox">
                     <div className="formarea">
                         <div className="subtitle">Log Into Fakebook</div>

@@ -5,6 +5,11 @@ const csurf = require('csurf');
 const cookieSession = require('cookie-session');
 const db = require('./database.js');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const uidSafe = require('uid-safe');
+const path = require('path');
+const s3 = require('./s3.js');
+const {s3Url} = require('./config.json');
 
 app.use(compression());
 
@@ -36,6 +41,24 @@ app.use(function(req, res, next) {
 
 app.use(express.static('public'));
 
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + '/uploads');
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
 app.get('/welcome', function(req, res) {
     if(req.session.userId) {
         res.redirect('/');
@@ -63,7 +86,6 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/login', (req, res) => {
-    console.log("trying post for login");
     db.showHashPw(req.body.email)
         .then(userPw => {
             if (!userPw) {
@@ -73,11 +95,9 @@ app.post('/login', (req, res) => {
             }
         })
         .then(doesMatch => {
-            console.log(doesMatch);
             if(doesMatch) {
                 db.getLoginId(req.body.email).then(id => {
                     req.session.userId = id;
-                    console.log(req.session.userId);
                     res.json({success:true});
                 });
             } else {
@@ -85,6 +105,21 @@ app.post('/login', (req, res) => {
             }
         })
         .catch(err => {console.log(err);});
+});
+
+app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
+console.log("upload route");
+    const imgUrl = s3Url + req.file.filename;
+    db.uploadImages(imgUrl, req.session.userId)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+app.get('/user', async function (req, res) {
+    const {rows} = await db.getUserById(req.session.userId);
+    res.json(rows[0]);
 });
 
 app.get('*', function(req, res) {

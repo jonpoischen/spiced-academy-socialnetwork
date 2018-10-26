@@ -38,7 +38,7 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="formcontainer">
-                <button className="loginregisterbutton"><Link to="/login" style={{ textDecoration: 'none' }}>Log In</Link></button>
+                <Link to="/login" className="loginregisterbutton" style={{ textDecoration: 'none' }}>Log In</Link>
                 <div className="flexcontainer">
                     <div className="connectnow">
                         <h2 className="connecttext bolden">Connect with friends and the world around you on Fakebook.</h2>
@@ -48,11 +48,11 @@ export default class Registration extends React.Component {
                         </div>
                         <div className="flexcontainer">
                             <img className="icon" src="/new.png" />
-                            <p className="smallertext"><span className="subtitle bolder" style={{fontWeight: 'bold'}}>Share what's new</span> in your life on your Timeline.</p>
+                            <p className="smallertext"><span className="subtitle bolder" style={{fontWeight: 'bold'}}>Share what&apos;s new</span> in your life on your Timeline.</p>
                         </div>
                         <div className="flexcontainer">
                             <img className="icon" src="/findmore.png" />
-                            <p className="smallertext"><span className="subtitle bolder" style={{fontWeight: 'bold'}}>Find more</span> of what you're looking for with Facebook Search.</p>
+                            <p className="smallertext"><span className="subtitle bolder" style={{fontWeight: 'bold'}}>Find more</span> of what you&apos;re looking for with Facebook Search.</p>
                         </div>
                     </div>
                     <div className="formarea">
