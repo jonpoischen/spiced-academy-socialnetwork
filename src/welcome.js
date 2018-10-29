@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Registration from './registration';
 import Login from './login';
 
@@ -7,12 +7,12 @@ export function Welcome() {
     return (
         <div className="logobox">
             <img className="logo" src="/fakebook.png" />
-            <HashRouter>
+            <BrowserRouter>
                 <div>
-                    <Route exact path="/" component={Registration} />
-                    <Route exact path="/login" component={Login} />
+                    <Route path="/welcome" component={Registration} />
+                    <Route path="/login" component={Login} />
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         </div>
     );
 }

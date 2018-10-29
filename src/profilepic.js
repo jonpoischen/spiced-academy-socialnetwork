@@ -6,6 +6,6 @@ export function ProfilePic(props) {
     }
     const image = props.image || '/default.jpg';
     return (
-        <img onClick={props.clickHandler} src={image} />
+        <img className={props.cssClass || "tinyusericon"} onClick={props.clickHandler} src={image} />
     );
 }

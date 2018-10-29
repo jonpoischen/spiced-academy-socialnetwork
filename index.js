@@ -108,7 +108,6 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
-console.log("upload route");
     const imgUrl = s3Url + req.file.filename;
     db.uploadImages(imgUrl, req.session.userId)
         .then(results => {
@@ -120,6 +119,14 @@ console.log("upload route");
 app.get('/user', async function (req, res) {
     const {rows} = await db.getUserById(req.session.userId);
     res.json(rows[0]);
+});
+
+app.post('/bio', function(req, res) {
+    db.updateBio(req.body.bio, req.session.userId)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
 });
 
 app.get('*', function(req, res) {

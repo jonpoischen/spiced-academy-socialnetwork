@@ -67,7 +67,7 @@ exports.getLoginId = function (email) {
 exports.uploadImages = function(url, id) {
     return db.query (
         `UPDATE users
-        SET img_url =$1
+        SET img_url = $1
         WHERE id = $2
         returning *;`,
         [url, id]
@@ -85,4 +85,17 @@ exports.getUserById = function(id) {
         `,
         [id]
     );
+};
+
+exports.updateBio = function(bio, id) {
+    return db.query(
+        `UPDATE users
+        SET bio = $1
+        WHERE id = $2
+        returning *;`,
+        [bio, id]
+    )
+        .then(function (results) {
+            return results.rows;
+        });
 };
