@@ -5,6 +5,7 @@ import { ProfilePic } from './profilepic.js';
 import Uploader from './uploader.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Opp from './opp.js';
 
 export class App extends React.Component {
     constructor(props) {
@@ -80,19 +81,29 @@ export class App extends React.Component {
                     />
                     }
                     <div>
-                        <Route path="/profile" render={
+                        <Route path="/profile" render = {
                             () => (
                                 <Profile
-                                    image={this.state.img_url}
-                                    first={this.state.first}
-                                    last={this.state.last}
-                                    id={this.state.id}
-                                    bio={this.state.bio}
-                                    clickHandler={this.showUploader}
+                                    image = {this.state.img_url}
+                                    first = {this.state.first}
+                                    last = {this.state.last}
+                                    id = {this.state.id}
+                                    bio = {this.state.bio}
+                                    clickHandler = {this.showUploader}
                                     setBio = {this.setBio}
                                 />
                             )
                         } />
+
+                        <Route
+                            path = "/user/:id"
+                            render = {props => (
+                                <Opp
+                                    {...props}
+                                    key = {props.match.url}
+                                />
+                            )}
+                        />
                     </div>
                 </div>
             </BrowserRouter>

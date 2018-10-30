@@ -129,6 +129,23 @@ app.post('/bio', function(req, res) {
         .catch(err => {console.log(err);});
 });
 
+app.get('/api-user/:id', function(req, res) {
+    if(req.session.userId == req.params.id) {
+        res.json({success:true});
+    } else {
+        db.getOppById(req.params.id)
+            .then(results => {
+                if(!results.rows) {
+                    res.json({success:true});
+                } else {
+                    res.json(results.rows);
+                }
+            })
+            .catch(err => {console.log(err);});
+    }
+});
+
+// Should be last one
 app.get('*', function(req, res) {
     if(!req.session.userId) {
         res.redirect('/welcome');

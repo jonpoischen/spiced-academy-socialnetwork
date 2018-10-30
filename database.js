@@ -99,3 +99,13 @@ exports.updateBio = function(bio, id) {
             return results.rows;
         });
 };
+
+exports.getOppById = function(id) {
+    return db.query(
+        `SELECT first, last, img_url, bio
+        FROM users
+        WHERE id = $1;
+        `,
+        [id]
+    );
+};
