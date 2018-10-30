@@ -21,10 +21,13 @@ export default class Profile extends React.Component {
                 />
                 <div className="streamflex">
                     <div className="leftstream">
+                        <img className="floatleft introicon" src="/worldIcon.png" />
+                        <span className="floatleft introtext">Intro</span>
+                        <br /><br /><br />
                         <Bio bio={this.props.bio} setBio={this.props.setBio} />
                     </div>
                     <div className="rightstream">
-                        <p>Hi</p>
+                        <p>Test: Your Profile</p>
                     </div>
                 </div>
             </div>

@@ -217,7 +217,7 @@ input:focus:invalid {
     font-size: 24px;
     color: white;
     bottom: 50px;
-    right: 150px;
+    width: 600px;
     position: relative;
 }
 
@@ -231,7 +231,7 @@ input:focus:invalid {
     width: 160px;
     height: 160px;
     border: 4px solid white;
-    background-color: white;
+    background-color: #e9ebee;
     border-radius: 100%;
     position: relative;
     bottom: 204px;
@@ -250,21 +250,19 @@ input:focus:invalid {
 }
 
 .leftstream {
-    background-color: blue;
+    background-color: white;
     float: left;
     width: 323px;
     display: inline-block;
-}
-
-.leftstream p {
-    color: white;
+    border: 1px solid #dddfe2;
 }
 
 .rightstream {
-    background-color: yellow;
+    background-color: white;
     float: right;
     display: inline-block;
     width: 516px;
+    border: 1px solid #dddfe2;
 }
 
 .toptabsflex {
@@ -374,4 +372,78 @@ input:focus:invalid {
 
 .whitebg {
     background-color: white;
+}
+
+.friendButton {
+    background: url(/addfriendicon.png) no-repeat;
+    background-position: 4px;
+    background-color: #e9ebee;
+    border: 2px solid #4b4f56;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: right;
+    width: 90px;
+    height: 26px;
+    position: relative;
+    bottom: 228px;
+    left: 230px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.friendButton:hover {
+    background-color: #ccd0d5;
+}
+
+.introtext {
+    font-size: 16px;
+    color: black;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.introicon {
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.biotext {
+    text-align: left;
+    padding: 8px;
+}
+
+.biotextarea {
+    width: 263px;
+    height: 56px;
+    padding: 16px 8px;
+}
+
+.floatleft {
+    float: left;
+}
+
+.editbiobutton {
+    border: none;
+    background-color: white;
+    padding-bottom: 20px;
+    color: #3578e5;
+    font-size: 14px;
+}
+
+.editbiobutton:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.savebiobutton {
+    background-color: #4267b2;
+    border-color: #4267b2;
+    color: white;
+    margin: 4px;
+    font-size: 14px;
+    border-radius: 2px;
+    font-weight: bold;
+    justify-content: center;
+    vertical-align: middle;
+    padding: 0 8px;
 }

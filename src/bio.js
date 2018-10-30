@@ -43,15 +43,16 @@ export default class Bio extends React.Component {
         if(this.state.editBio == true) {
             return (
                 <div>
-                    <textarea defaultValue={this.props.bio} onChange={this.handleChange}></textarea>
-                    <button onClick={this.handleBioSave}>Save</button>
+                    <textarea className="biotextarea" defaultValue={this.props.bio} onChange={this.handleChange}></textarea>
+                    <br />
+                    <button className="savebiobutton" onClick={this.handleBioSave}>Save</button>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <p>{this.props.bio}</p>
-                    <button onClick={this.showBio}>Edit</button>
+                    <p className="biotext">{this.props.bio}</p>
+                    <button className="editbiobutton" onClick={this.showBio}>Edit</button>
                 </div>
             );
         }
