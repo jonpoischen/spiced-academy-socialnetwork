@@ -13,9 +13,11 @@ export default class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.error;
     }
+
     handleChange(evt) {
         this.setState({ [evt.target.name]: evt.target.value });
     }
+
     handleSubmit(evt) {
         evt.preventDefault();
         axios.post('/login', this.state)
@@ -30,6 +32,7 @@ export default class Login extends React.Component {
                 console.log(err);
             });
     }
+    
     render() {
         return (
             <div className="formcontainer extrapadding">

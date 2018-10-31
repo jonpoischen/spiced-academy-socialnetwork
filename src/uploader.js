@@ -10,9 +10,11 @@ export default class Uploader extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleUploadImage = this.handleUploadImage.bind(this);
     }
+
     handleChange(evt) {
         this.setState({ "file": evt.target.files[0] });
     }
+
     handleUploadImage(evt) {
         evt.preventDefault();
 
@@ -27,6 +29,7 @@ export default class Uploader extends React.Component {
                 console.log(err);
             });
     }
+    
     render() {
         return(
             <div className="formarea">

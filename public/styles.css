@@ -381,6 +381,7 @@ input:focus:invalid {
     border: 2px solid #4b4f56;
     border-radius: 5px;
     font-size: 12px;
+    font-weight: bold;
     text-align: right;
     width: 90px;
     height: 26px;

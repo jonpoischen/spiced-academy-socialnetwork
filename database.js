@@ -38,8 +38,7 @@ exports.showHashPw = function (email) {
     return db.query(`SELECT password FROM users WHERE email = $1`, [email])
         .then(function(result) {
             return result.rows[0] && result.rows[0].password;
-        })
-        .catch(function(err) {console.log(err);});
+        });
 };
 
 exports.checkPassword = function(textEnteredInLoginForm, hashedPasswordFromDatabase) {
@@ -58,9 +57,6 @@ exports.getLoginId = function (email) {
     return db.query(`SELECT id FROM users WHERE email = $1`, [email])
         .then(function(result) {
             return result.rows[0].id;
-        })
-        .catch(err => {
-            console.log(err);
         });
 };
 
@@ -69,7 +65,7 @@ exports.uploadImages = function(url, id) {
         `UPDATE users
         SET img_url = $1
         WHERE id = $2
-        returning *;`,
+        RETURNING *;`,
         [url, id]
     )
         .then(function (results) {
@@ -92,7 +88,7 @@ exports.updateBio = function(bio, id) {
         `UPDATE users
         SET bio = $1
         WHERE id = $2
-        returning *;`,
+        RETURNING *;`,
         [bio, id]
     )
         .then(function (results) {
@@ -108,4 +104,60 @@ exports.getOppById = function(id) {
         `,
         [id]
     );
+};
+
+exports.getFriendship = function(user_id, potential_friend_id) {
+    return db.query(
+        `SELECT *
+        FROM friendships
+        WHERE (sender_id = $1 AND receiver_id = $2)
+        OR (receiver_id = $1 AND sender_id = $2);
+        `,
+        [user_id, potential_friend_id]
+    )
+        .then(function (results) {
+            return results.rows[0];
+        });
+};
+
+exports.sendFriendRequest = function(sender_id, receiver_id) {
+    return db.query(
+        `INSERT INTO friendships
+        (sender_id, receiver_id)
+        VALUES ($1, $2)
+        RETURNING *;
+        `,
+        [sender_id, receiver_id]
+    )
+        .then(function (results) {
+            return results.rows[0];
+        });
+};
+
+exports.acceptFriendRequest = function(sender_id, receiver_id) {
+    return db.query(
+        `UPDATE friendships
+        SET accepted = true
+        WHERE (receiver_id=$1 AND sender_id = $2)
+        OR (sender_id=$1 AND receiver_id = $2)
+        RETURNING receiver_id, sender_id, accepted, id;
+        `,
+        [sender_id, receiver_id]
+    )
+        .then(function (results) {
+            return results.rows[0];
+        });
+};
+
+exports.endFriendship = function(sender_id, receiver_id) {
+    return db.query(
+        `DELETE FROM friendships
+        WHERE (receiver_id=$1 AND sender_id = $2)
+        OR (sender_id=$1 AND receiver_id = $2);
+        `,
+        [sender_id, receiver_id]
+    )
+        .then(function (results) {
+            return results.rows[0];
+        });
 };

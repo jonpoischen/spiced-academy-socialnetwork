@@ -25,7 +25,7 @@ export default class Opp extends React.Component {
                 <img className="coverphoto" src="/fakebook_cover.jpeg" />
                 <p className="profilename">{this.state.first} {this.state.last}</p>
 
-                <FriendButton></FriendButton>
+                <FriendButton receiverId={this.props.match.params.id}></FriendButton>
 
                 <img className="bigusericon" src={this.state.img_url} />
                 <div className="streamflex">

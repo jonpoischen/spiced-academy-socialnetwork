@@ -9,8 +9,9 @@ export default class Bio extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleBioSave = this.handleBioSave.bind(this);
-        this.showBio = this.showBio.bind(this);
+        this.showBioEdit = this.showBioEdit.bind(this);
     }
+
     handleBioSave(bio) {
         bio.preventDefault();
 
@@ -25,10 +26,12 @@ export default class Bio extends React.Component {
                 console.log(err);
             });
     }
+
     handleChange(evt) {
         this.setState({ bio: evt.target.value });
     }
-    showBio() {
+
+    showBioEdit() {
         if (this.state.editBio === true) {
             this.setState({
                 editBio: false
@@ -39,6 +42,7 @@ export default class Bio extends React.Component {
             });
         }
     }
+    
     render() {
         if(this.state.editBio == true) {
             return (
@@ -52,7 +56,7 @@ export default class Bio extends React.Component {
             return (
                 <div>
                     <p className="biotext">{this.props.bio}</p>
-                    <button className="editbiobutton" onClick={this.showBio}>Edit</button>
+                    <button className="editbiobutton" onClick={this.showBioEdit}>Edit</button>
                 </div>
             );
         }

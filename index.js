@@ -145,7 +145,39 @@ app.get('/api-user/:id', function(req, res) {
     }
 });
 
-// Should be last one
+app.get('/friendship-status', function(req, res) {
+    db.getFriendship(req.session.userId, req.query.id)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+app.post('/send-friend-request', function(req, res) {
+    db.sendFriendRequest(req.session.userId, req.body.id)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+app.post('/accept-friend-request', function(req, res) {
+    db.acceptFriendRequest(req.session.userId, req.body.receiver_id)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+app.post('/end-friendship', function(req, res) {
+    db.endFriendship(req.session.userId, req.body.receiver_id)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+// Should be last one before 8080
 app.get('*', function(req, res) {
     if(!req.session.userId) {
         res.redirect('/welcome');

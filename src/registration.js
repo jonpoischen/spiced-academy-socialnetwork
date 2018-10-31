@@ -15,9 +15,11 @@ export default class Registration extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.error;
     }
+
     handleChange(evt) {
         this.setState({ [evt.target.name]: evt.target.value });
     }
+
     handleSubmit(evt) {
         evt.preventDefault();
         axios.post('/register', this.state)
@@ -32,6 +34,7 @@ export default class Registration extends React.Component {
                 console.log(err);
             });
     }
+    
     render() {
         return (
             <div className="formcontainer">

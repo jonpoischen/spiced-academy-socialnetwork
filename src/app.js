@@ -15,6 +15,7 @@ export class App extends React.Component {
         this.setImage = this.setImage.bind(this);
         this.setBio = this.setBio.bind(this);
     }
+
     componentDidMount() {
         axios.get('/user').then(
             ({data}) => {
@@ -22,17 +23,20 @@ export class App extends React.Component {
             }
         );
     }
+
     setBio(bio) {
         this.setState({
             bio: bio
         });
     }
+
     setImage(image) {
         this.setState({
             img_url: image,
             uploadStatus: false
         });
     }
+
     showUploader() {
         if (this.state.uploadStatus === true) {
             this.setState({
@@ -44,6 +48,7 @@ export class App extends React.Component {
             });
         }
     }
+
     render() {
         if (!this.state.id) {
             return null;
