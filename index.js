@@ -177,6 +177,14 @@ app.post('/end-friendship', function(req, res) {
         .catch(err => {console.log(err);});
 });
 
+app.get('/api-friends', function(req, res) {
+    db.getFriendsAndWannabes(req.session.userId)
+        .then(results => {
+            res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
 // Should be last one before 8080
 app.get('*', function(req, res) {
     if(!req.session.userId) {

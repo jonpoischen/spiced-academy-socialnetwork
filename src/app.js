@@ -6,6 +6,7 @@ import Uploader from './uploader.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Opp from './opp.js';
+import Friends from './friends.js';
 
 export class App extends React.Component {
     constructor(props) {
@@ -76,7 +77,7 @@ export class App extends React.Component {
                                 <Link to="/"><span>Home</span></Link>
                             </div>
                             <div className="usertab">
-                                <span>Find Friends</span>
+                                <Link to="/friends"><span>Friends</span></Link>
                             </div>
                         </div>
                     </div>
@@ -109,6 +110,8 @@ export class App extends React.Component {
                                 />
                             )}
                         />
+
+                        <Route path='/friends' component={Friends} />
                     </div>
                 </div>
             </BrowserRouter>
