@@ -235,7 +235,11 @@ input:focus:invalid {
     border-radius: 100%;
     position: relative;
     bottom: 204px;
-    right: 336px;
+    right: 380px;
+}
+
+.bigusericon.yours {
+    right: 334px;
 }
 
 .profile {
@@ -447,4 +451,102 @@ input:focus:invalid {
     justify-content: center;
     vertical-align: middle;
     padding: 0 8px;
+}
+
+.wannabeflex {
+    justify-content: space-between;
+    display: flex;
+    width: 899px;
+    margin: 0 auto;
+}
+
+.wannabetitle {
+    border: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
+    text-align: left;
+    background: url('/addfriendicon.png') no-repeat;
+    background-position: 4px;
+    background-size: 24px;
+    background-color: #e9ebee;
+    padding-left: 3em;
+    padding-top: .5em;
+    width: 849px;
+    margin: 0 auto;
+}
+
+.wannabecontainer {
+    border: 1px solid #d3d6db;
+    width: 430px;
+    height: 120px;
+    margin-top: 3px;
+    margin-bottom: 13px;
+    display: inline-block;
+}
+
+.wannabepic {
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    margin-right: 268px;
+    border: 1px solid #d3d6db;
+}
+
+.wannabetext {
+    position: relative;
+    bottom: 70px;
+    left: 70px;
+    color: #365899;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.wannabetext:hover {
+    text-decoration: underline;
+}
+
+.wannabebutton {
+    background-color: #4267b2;
+    border-color: #4267b2;
+    color: white;
+    font-weight: bold;
+    border: 1px solid;
+    border-radius: 2px;
+    box-sizing: content-box;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0 8px;
+    position: relative;
+    text-align: center;
+    text-shadow: none;
+    vertical-align: middle;
+    text-decoration: none;
+    white-space: nowrap;
+    height: 22px;
+    width: 84px;
+    bottom: 60px;
+    left: 70px;
+}
+
+.wannabebutton:hover {
+    transition: 200ms cubic-bezier(.08,.52,.52,1) background-color, 200ms cubic-bezier(.08,.52,.52,1) box-shadow, 200ms cubic-bezier(.08,.52,.52,1) transform;
+    cursor: pointer;
+}
+
+.friendstitle {
+    border: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
+    text-align: left;
+    background: url('/friend.png') no-repeat;
+    background-position: 4px;
+    background-size: 24px;
+    background-color: #e9ebee;
+    padding-left: 3em;
+    padding-top: .5em;
+    width: 849px;
+    margin: 0 auto;
+    margin-top: 50px;
 }

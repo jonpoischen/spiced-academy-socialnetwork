@@ -10,6 +10,8 @@ const uidSafe = require('uid-safe');
 const path = require('path');
 const s3 = require('./s3.js');
 const {s3Url} = require('./config.json');
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080' });
 
 app.use(compression());
 
@@ -24,10 +26,15 @@ if (process.env.NODE_ENV != 'production') {
     app.use('/bundle.js', (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-app.use(cookieSession({
+const cookieSessionMiddleware = cookieSession({
     secret: `I'm always angry.`,
-    maxAge: 1000 * 60 * 60 * 24 * 14
-}));
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(bodyParser.json());
 app.use(require('body-parser').urlencoded({extended: false}));
@@ -194,6 +201,50 @@ app.get('*', function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
 });
+
+// // server-side socket code
+// let onlineUsers = [];
+//
+// io.on('connection', function(socket) {
+//     console.log("io running");
+//     // list of everyone who is online
+//     onlineUsers.push({
+//         userId: socket.request.session.userId,
+//         socketId: socket.id
+//     });
+//
+//     let ids = onlineUsers.map(user => {
+//         return user.userId;
+//     });
+//
+//     db.getUsersByIds(ids).then(results => {
+//         socket.emit('onlineUsers', results.rows);
+//     });
+//
+//     // take newly connected user's userId and
+//     // give to the db to get the user's data
+//     // once we have that info, broadcast userJoined event
+//     // and include response from db as message
+//     socket.broadcast.emit('userJoined', somePayload);
+//
+//     // remove users when they disconnect to socket
+//
+//     socket.request.session.userId to get req.session.userId
+//
+//     // this event fires when a user disconnects
+//     socket.on('disconnect', function() {
+//         console.log(`socket with the id ${socket.id} is now disconnected`);
+//         io.sockets.emit('userLeft', someMessage);
+//     });
+//
+//     socket.on('thanks', function(data) {
+//         console.log(data);
+//     });
+//
+//     socket.emit('welcome', {
+//         message: 'Welome. It is nice to see you'
+//     });
+// });

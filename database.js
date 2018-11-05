@@ -177,3 +177,8 @@ exports.getFriendsAndWannabes = function(id) {
             return results.rows;
         });
 };
+
+exports.getUsersByIds = function(arrayOfIds) {
+    const query = `SELECT id, first, last, img_url FROM users WHERE id = ANY($1)`;
+    return db.query(query, [arrayOfIds]);
+};

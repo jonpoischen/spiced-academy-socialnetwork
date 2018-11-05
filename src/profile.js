@@ -6,14 +6,14 @@ export default class Profile extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+
     render() {
         return (
             <div className="profile formcontainer">
                 <img className="coverphoto" src="/fakebook_cover.jpeg" />
                 <p className="profilename">{this.props.first} {this.props.last}</p>
                 <ProfilePic
-                    cssClass = {'bigusericon'}
+                    cssClass = {'bigusericon yours'}
                     image={this.props.image}
                     first={this.props.first}
                     last={this.props.last}

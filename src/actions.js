@@ -1,23 +1,38 @@
-import axios from 'axios';
+import axios from './axios.js';
 
 export async function receiveFriendsAndWannabes() {
     const {data} = await axios.get('/api-friends');
     return {
         type: 'RECEIVE_FRIENDS_AND_WANNABES',
-        friendsAndWannabes: data
+        data
     };
 }
 
-// need acceptFriendRequest function
-export function acceptFriendRequest(id) {
-    axios.post('/accept-friend-request', {
-        receiver_id: id
-    }).then(() => {
-        return {
-            type: "ACCEPT_FRIEND_REQUEST",
-            id: id
-        };
-    }).catch(err => console.log(err));
+export async function acceptFriendRequest(id) {
+    await axios.post('/accept-friend-request', {receiver_id: id});
+    return {
+        type: "ACCEPT_FRIEND_REQUEST",
+        id
+    };
 }
 
-// need unfriend function
+export async function endFriendship(id) {
+    await axios.post('/end-friendship', {receiver_id: id});
+    return {
+        type: "UNFRIEND",
+        id
+    };
+}
+
+
+export function onlineUsers(onlineUsersList) {
+    console.log("onlineUsers action fired!", onlineUsersList);
+}
+
+export function userJoined(userJoined) {
+    console.log("userJoined fired!", userJoined);
+}
+
+export function userLeft(userLeft) {
+    console.log("userLeft fired!", userLeft);
+}
