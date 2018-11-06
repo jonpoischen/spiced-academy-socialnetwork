@@ -16,7 +16,7 @@ class Friends extends React.Component {
         }
 
         return (
-            <div>
+            <div className="friendsContainer">
                 {this.props.wannabes.length > 0 && <div className="wannabetitle"><h1>Friend Requests</h1></div>}
                 {this.props.wannabes.length == 0 && <div><h1>no wannabes...</h1></div>}
 
@@ -40,7 +40,7 @@ class Friends extends React.Component {
                     friends => (
                         <div className="wannabecontainer" key={friends.id}>
                             <img className="wannabepic" src={friends.img_url} />
-                            <div className="wannabetext">{friends.first} {friends.last}</div>
+                            <Link to={`/user/${friends.id}`}><span><div className="wannabetext">{friends.first} {friends.last}</div></span></Link>
                             <button className="wannabebutton" onClick={() => dispatch(endFriendship(friends.id))}>Unfriend</button>
                         </div>
                     )

@@ -7,6 +7,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Opp from './opp.js';
 import Friends from './friends.js';
+import OnlineUsers from './online.js';
+import Chat from './chat.js';
 
 export class App extends React.Component {
     constructor(props) {
@@ -112,6 +114,10 @@ export class App extends React.Component {
                         />
 
                         <Route path='/friends' component={Friends} />
+
+                        <Route path='/online' component={OnlineUsers} />
+
+                        <Route path='/chat' component={Chat} />
                     </div>
                 </div>
             </BrowserRouter>

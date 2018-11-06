@@ -30,5 +30,28 @@ export default function reducer(state = {}, action) {
             )
         };
     }
+    if (action.type == 'ONLINE_USERS') {
+        state = {
+            ...state,
+            onlineUsers: action.users
+        };
+    }
+    if (action.type == 'USER_JOINED') {
+        state = {
+            ...state,
+            onlineUsers: [...state.onlineUsers, action.userJoined[0]]
+        };
+    }
+    if (action.type == 'USER_LEFT') {
+        console.log("user left action: ",action);
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(user => {
+                if (user.id !== action.userLeft) {
+                    return user;
+                }
+            })
+        };
+    }
     return state;
 }

@@ -454,8 +454,8 @@ input:focus:invalid {
 }
 
 .wannabeflex {
-    justify-content: space-between;
     display: flex;
+    flex-flow: row wrap;
     width: 899px;
     margin: 0 auto;
 }
@@ -478,17 +478,18 @@ input:focus:invalid {
     border: 1px solid #d3d6db;
     width: 430px;
     height: 120px;
-    margin-top: 3px;
-    margin-bottom: 13px;
-    display: inline-block;
+    margin: 8px;
+    /* display: inline-block; */
+    background-color: #e9ebee;
 }
 
 .wannabepic {
     height: 100px;
     width: 100px;
     margin-top: 10px;
-    margin-right: 268px;
+    margin-right: 310px;
     border: 1px solid #d3d6db;
+    background-color: white;
 }
 
 .wannabetext {
@@ -497,13 +498,15 @@ input:focus:invalid {
     left: 70px;
     color: #365899;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: #e9ebee;
     font-weight: 600;
     font-size: 24px;
 }
 
 .wannabetext:hover {
     text-decoration: underline;
+    text-decoration-color: #365899;
 }
 
 .wannabebutton {
@@ -548,5 +551,30 @@ input:focus:invalid {
     padding-top: .5em;
     width: 849px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
+}
+
+.friendsContainer {
+    width: 899px;
+    margin: 0 auto;
+    border: 1px solid #d3d6db;
+}
+
+.onlinetitle {
+    border: 1px solid #d3d6db;
+    border-radius: 2px 2px 0 0;
+    background-position: 4px;
+    background-size: 24px;
+    background-color: #e9ebee;
+    padding-left: 3em;
+    padding-top: .5em;
+    width: 849px;
+    margin: 0 auto;
+}
+
+.chatMessagesContainer {
+    height: 500px;
+    width: 849px;
+    border: 5px solid purple;
+    overflow-y: scroll;
 }

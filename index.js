@@ -192,7 +192,8 @@ app.get('/api-friends', function(req, res) {
         .catch(err => {console.log(err);});
 });
 
-// Should be last one before 8080
+// "*" should be last one before 8080
+// to match anything else (not found above)
 app.get('*', function(req, res) {
     if(!req.session.userId) {
         res.redirect('/welcome');
@@ -205,46 +206,43 @@ server.listen(8080, function() {
     console.log("I'm listening.");
 });
 
-// // server-side socket code
-// let onlineUsers = [];
-//
-// io.on('connection', function(socket) {
-//     console.log("io running");
-//     // list of everyone who is online
-//     onlineUsers.push({
-//         userId: socket.request.session.userId,
-//         socketId: socket.id
-//     });
-//
-//     let ids = onlineUsers.map(user => {
-//         return user.userId;
-//     });
-//
-//     db.getUsersByIds(ids).then(results => {
-//         socket.emit('onlineUsers', results.rows);
-//     });
-//
-//     // take newly connected user's userId and
-//     // give to the db to get the user's data
-//     // once we have that info, broadcast userJoined event
-//     // and include response from db as message
-//     socket.broadcast.emit('userJoined', somePayload);
-//
-//     // remove users when they disconnect to socket
-//
-//     socket.request.session.userId to get req.session.userId
-//
-//     // this event fires when a user disconnects
-//     socket.on('disconnect', function() {
-//         console.log(`socket with the id ${socket.id} is now disconnected`);
-//         io.sockets.emit('userLeft', someMessage);
-//     });
-//
-//     socket.on('thanks', function(data) {
-//         console.log(data);
-//     });
-//
-//     socket.emit('welcome', {
-//         message: 'Welome. It is nice to see you'
-//     });
-// });
+// server-side socket code
+let onlineUsers = [];
+
+io.on('connection', function(socket) {
+    console.log("io running. " + new Date().toString().split(" ")[4]);
+    if (!socket.request.session || !socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    onlineUsers.push({
+        userId: socket.request.session.userId,
+        socketId: socket.id
+    });
+
+    let ids = onlineUsers.map(user => {
+        return user.userId;
+    });
+
+    db.getUserById(socket.request.session.userId).then(results => {
+        console.log(`socket with the id ${socket.id} joined`);
+        socket.broadcast.emit('userJoined', results.rows);
+    });
+
+    db.getUsersByIds(ids).then(results => {
+        socket.emit('onlineUsers', results.rows);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`socket with the id ${socket.id} is now disconnected`);
+        io.sockets.emit('userLeft', socket.request.session.userId);
+    });
+
+    // socket.on('newMessage', function(newMessage) {
+    //     console.log("new message: ", newMessage);
+    //     // get posters first, last, img_url
+    //     // insert new chat message in DB
+    //
+    //     io.sockets.emit('newMessage', newMessageObj);
+    // });
+});

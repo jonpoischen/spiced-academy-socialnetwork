@@ -24,15 +24,23 @@ export async function endFriendship(id) {
     };
 }
 
-
-export function onlineUsers(onlineUsersList) {
-    console.log("onlineUsers action fired!", onlineUsersList);
+export function onlineUsersList(users) {
+    return {
+        type: 'ONLINE_USERS',
+        users
+    };
 }
 
 export function userJoined(userJoined) {
-    console.log("userJoined fired!", userJoined);
+    return {
+        type: 'USER_JOINED',
+        userJoined
+    };
 }
 
 export function userLeft(userLeft) {
-    console.log("userLeft fired!", userLeft);
+    return {
+        type: 'USER_LEFT',
+        userLeft
+    }
 }
