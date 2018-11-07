@@ -42,5 +42,19 @@ export function userLeft(userLeft) {
     return {
         type: 'USER_LEFT',
         userLeft
-    }
+    };
+}
+
+export function savedMessages(messages) {
+    return {
+        type: 'SAVED_MESSAGES',
+        messages
+    };
+}
+
+export function newMessage(message) {
+    return {
+        type: 'NEW_MESSAGE',
+        message
+    };
 }

@@ -1,13 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {onlineUsersList, userJoined, userLeft} from './actions.js';
 
 class OnlineUsers extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(onlineUsersList());
-    }
-
     render() {
         const { users } = this.props;
 

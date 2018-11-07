@@ -17,8 +17,14 @@ class Friends extends React.Component {
 
         return (
             <div className="friendsContainer">
-                {this.props.wannabes.length > 0 && <div className="wannabetitle"><h1>Friend Requests</h1></div>}
-                {this.props.wannabes.length == 0 && <div><h1>no wannabes...</h1></div>}
+                {this.props.wannabes.length > 0 &&
+                    <div className="wannabetitle">
+                        <h1>Friend Requests</h1>
+                    </div>}
+                {this.props.wannabes.length == 0 &&
+                    <div className="nofriendscontainer">
+                        <h2 className="nofriendstext">No New Friend Requests</h2>
+                    </div>}
 
                 <div className="wannabeflex">
                     {this.props.wannabes.length > 0 &&
@@ -32,8 +38,17 @@ class Friends extends React.Component {
                     )
                 )}
                 </div>
-                {this.props.friends.length > 0 && <div className="friendstitle"><h1>Friends</h1></div>}
-                {this.props.friends.length == 0 && <div><h1>no friends...</h1></div>}
+
+
+
+                {this.props.friends.length > 0 &&
+                    <div className="friendstitle">
+                        <h1>Friends</h1>
+                    </div>}
+                {this.props.friends.length == 0 &&
+                    <div className="nofriendscontainer">
+                        <h2 className="nofriendstext">No Friends</h2>
+                    </div>}
                 <div className="wannabeflex">
                     {this.props.friends.length > 0 &&
                 this.props.friends.map(

@@ -225,7 +225,6 @@ io.on('connection', function(socket) {
     });
 
     db.getUserById(socket.request.session.userId).then(results => {
-        console.log(`socket with the id ${socket.id} joined`);
         socket.broadcast.emit('userJoined', results.rows);
     });
 
@@ -233,16 +232,27 @@ io.on('connection', function(socket) {
         socket.emit('onlineUsers', results.rows);
     });
 
+    db.getSavedMessages().then(results => {
+        socket.emit('savedMessages', results.rows.reverse());
+    }).catch(err => {console.log(err);});
+
     socket.on('disconnect', () => {
-        console.log(`socket with the id ${socket.id} is now disconnected`);
         io.sockets.emit('userLeft', socket.request.session.userId);
     });
 
-    // socket.on('newMessage', function(newMessage) {
-    //     console.log("new message: ", newMessage);
-    //     // get posters first, last, img_url
-    //     // insert new chat message in DB
-    //
-    //     io.sockets.emit('newMessage', newMessageObj);
-    // });
+    socket.on('newMessage', function(newMessage) {
+        db.newChatPost(socket.request.session.userId, newMessage).then((result) => {
+            let msg_time = result.rows[0].msg_created;
+            db.getUserById(socket.request.session.userId).then(results => {
+                let newMsg = {
+                    first: results.rows[0].first,
+                    last: results.rows[0].last,
+                    img_url: results.rows[0].img_url,
+                    message: newMessage,
+                    msg_created: msg_time
+                };
+                io.sockets.emit('newMessage', newMsg);
+            });
+        }).catch(err => {console.log(err);});
+    });
 });

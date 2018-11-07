@@ -182,3 +182,38 @@ exports.getUsersByIds = function(arrayOfIds) {
     const query = `SELECT id, first, last, img_url FROM users WHERE id = ANY($1)`;
     return db.query(query, [arrayOfIds]);
 };
+
+exports.getSavedMessages = function() {
+    return db.query(
+        `
+        SELECT users.id, first, last, img_url, message, msg_created
+        FROM chat
+        LEFT JOIN users
+        ON poster_id = users.id
+        ORDER BY chat.id DESC
+        LIMIT 20;
+        `
+    )
+        .then(function (results) {
+            return results;
+        });
+};
+
+exports.newChatPost = function(id, message) {
+    return db.query(
+        `INSERT INTO chat
+        (poster_id, message)
+        VALUES ($1, $2)
+        RETURNING *;
+        `,
+        [id, message]
+    ).then(() => {
+        return db.query(
+            `SELECT users.id, first, last, img_url, message, msg_created
+            FROM chat
+            FULL OUTER JOIN users
+            ON poster_id = users.id;
+            `
+        );
+    });
+};

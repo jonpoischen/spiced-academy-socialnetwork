@@ -43,7 +43,6 @@ export default function reducer(state = {}, action) {
         };
     }
     if (action.type == 'USER_LEFT') {
-        console.log("user left action: ",action);
         state = {
             ...state,
             onlineUsers: state.onlineUsers.filter(user => {
@@ -51,6 +50,18 @@ export default function reducer(state = {}, action) {
                     return user;
                 }
             })
+        };
+    }
+    if (action.type == 'SAVED_MESSAGES') {
+        state = {
+            ...state,
+            savedMessages: action.messages
+        };
+    }
+    if (action.type == 'NEW_MESSAGE') {
+        state = {
+            ...state,
+            savedMessages: [...state.savedMessages, action.message]
         };
     }
     return state;

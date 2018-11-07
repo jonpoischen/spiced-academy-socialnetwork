@@ -117,7 +117,7 @@ export class App extends React.Component {
 
                         <Route path='/online' component={OnlineUsers} />
 
-                        <Route path='/chat' component={Chat} />
+                        <Route path='/messenger' component={Chat} />
                     </div>
                 </div>
             </BrowserRouter>
