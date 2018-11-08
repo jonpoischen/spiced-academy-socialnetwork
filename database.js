@@ -162,6 +162,21 @@ exports.endFriendship = function(sender_id, receiver_id) {
         });
 };
 
+exports.getFeedPosts = function() {
+    return db.query(
+        `SELECT users.id, first, last, users.img_url, feed.img_url AS feedPic, feed.message, feed.created_at
+        FROM feed
+        JOIN users
+        ON poster_id = users.id
+        ORDER BY feed.id DESC
+        LIMIT 20;
+        `
+    )
+        .then(function (results) {
+            return results;
+        });
+};
+
 exports.getFriendsAndWannabes = function(id) {
     return db.query(
         `SELECT users.id, first, last, img_url, accepted
@@ -216,4 +231,18 @@ exports.newChatPost = function(id, message) {
             `
         );
     });
+};
+
+exports.uploadFeed = function (imgUrl, text, id) {
+    return db.query(
+        `INSERT INTO feed
+        (img_url, message, poster_id)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+        `,
+        [imgUrl, text, id]
+    )
+        .then(function (results) {
+            return results;
+        });
 };

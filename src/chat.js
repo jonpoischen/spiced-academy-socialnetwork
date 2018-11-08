@@ -14,9 +14,9 @@ class Chat extends React.Component {
         this.sendMessageByButton = this.sendMessageByButton.bind(this);
     }
 
-    // componentDidMount() {
-    //     document.getElementsByClassName('chatInput')[0].focus();
-    // }
+    componentDidMount() {
+        this.chatContainer.scrollTop = this.chatContainer.scrollHeight - this.chatContainer.clientHeight;
+    }
 
     updateInputValue(e) {
         this.setState({

@@ -5,6 +5,13 @@ export default function reducer(state = {}, action) {
             friendsAndWannabes: action.data
         };
     }
+    if (action.type == 'RECEIVE_FEED_POSTS') {
+        console.log("reducer: ", action.data);
+        state = {
+            ...state,
+            posts: action.data
+        };
+    }
     if (action.type == 'ACCEPT_FRIEND_REQUEST') {
         state = {
             ...state,

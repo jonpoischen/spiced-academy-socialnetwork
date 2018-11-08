@@ -128,6 +128,13 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
         .catch(err => {console.log(err);});
 });
 
+app.post('/feed', uploader.single('file'), s3.upload, function(req) {
+    const imgUrl = s3Url + req.file.filename;
+    db.uploadFeed(imgUrl, req.body.text, req.session.userId)
+        .then(() => {})
+        .catch(err => {console.log(err);});
+});
+
 app.get('/user', async function (req, res) {
     const {rows} = await db.getUserById(req.session.userId);
     res.json(rows[0]);
@@ -193,6 +200,15 @@ app.get('/api-friends', function(req, res) {
     db.getFriendsAndWannabes(req.session.userId)
         .then(results => {
             res.json(results);
+        })
+        .catch(err => {console.log(err);});
+});
+
+app.get('/feed-posts', function(req, res) {
+    db.getFeedPosts()
+        .then(results => {
+            console.log("results: ", results.rows.reverse());
+            res.json(results.rows.reverse());
         })
         .catch(err => {console.log(err);});
 });

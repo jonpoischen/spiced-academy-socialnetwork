@@ -9,6 +9,7 @@ import Opp from './opp.js';
 import Friends from './friends.js';
 import OnlineUsers from './online.js';
 import Chat from './chat.js';
+import Feed from './feed.js';
 
 export class App extends React.Component {
     constructor(props) {
@@ -130,6 +131,8 @@ export class App extends React.Component {
                         <Route path='/online' component={OnlineUsers} />
 
                         <Route path='/messenger' component={Chat} />
+
+                        <Route exact path='/test' component={Feed} />
                     </div>
                 </div>
             </BrowserRouter>

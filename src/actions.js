@@ -1,5 +1,15 @@
 import axios from './axios.js';
 
+export async function receiveFeedPosts() {
+    console.log("action posts fired!");
+    const {data} = await axios.get('/feed-posts');
+    console.log("action data: ", data);
+    return {
+        type: 'RECEIVE_FEED_POSTS',
+        data
+    };
+}
+
 export async function receiveFriendsAndWannabes() {
     const {data} = await axios.get('/api-friends');
     return {
