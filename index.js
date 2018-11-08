@@ -207,7 +207,6 @@ app.get('/api-friends', function(req, res) {
 app.get('/feed-posts', function(req, res) {
     db.getFeedPosts()
         .then(results => {
-            console.log("results: ", results.rows.reverse());
             res.json(results.rows.reverse());
         })
         .catch(err => {console.log(err);});

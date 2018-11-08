@@ -50,12 +50,10 @@ class Feed extends React.Component {
             data = {
                 text: this.state.inputValue
             };
-            console.log("no file but text: ", data);
         } else {
             data = new FormData;
             data.append('text', this.state.inputValue);
             data.append('file', this.state.file);
-            console.log("both file and text: ", this.state);
         }
 
         axios.post('/feed', data)
@@ -118,7 +116,6 @@ class Feed extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log("states: ", state.posts);
     return {
         posts: state.posts
     };

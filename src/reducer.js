@@ -6,7 +6,6 @@ export default function reducer(state = {}, action) {
         };
     }
     if (action.type == 'RECEIVE_FEED_POSTS') {
-        console.log("reducer: ", action.data);
         state = {
             ...state,
             posts: action.data
