@@ -79,12 +79,19 @@ class Feed extends React.Component {
         }
 
         return (
-            <div>
+            <div className="formcontainer">
                 <div className="newPostContainer">
                     <div className="makepostbox"><span><img className="makepostpen" src="/pen.png" /><h4 className="makeposttext">Make Post</h4></span></div>
                     <input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} className="postInput" onKeyDown={this.sendMessage} autoFocus={true} placeholder=" What's on your mind?"></input><br />
-                    <input type="file" accept="image/*" onChange={this.handleChange} />
-                    <div><button className="chatSendButton" onClick={this.sendMessageByButton}>Share</button></div>
+
+                    <div className='imageupload'>
+                        <label htmlFor="fileinput">
+                            <img src="/uploadphotobutton.png"/>
+                        </label>
+                        <input id="fileinput" type="file" accept="image/*" onChange={this.handleChange} />
+                    </div>
+
+                    <div><button className="sharepostbutton" onClick={this.sendMessageByButton}>Share</button></div>
                 </div>
 
                 <div className="postsContainer" ref={elem => (this.chatContainer = elem)}>
@@ -93,10 +100,12 @@ class Feed extends React.Component {
                             (post, index) => {
                                 return (
                                     <div key={index}>
-                                        <div><img className="chatpic" src={post.img_url} /></div>
-                                        <Link to={`/user/${post.id}`}><span><div className="chatusername">{post.first} {post.last}</div></span></Link>
-                                        <div className="chatmessagetext">{post.message} <p className="chattimestamp">{post.msg_created}</p></div>
-                                        <img src={post.feedpic} />
+                                        <div><img className="postpic" src={post.img_url} /></div>
+                                        <Link to={`/user/${post.id}`}><span><div className="postusername">{post.first} {post.last}</div></span></Link>
+                                        <p className="posttime">{post.created_at}</p>
+                                        <div className="postmessagetext">{post.message}</div>
+                                        <img className="postuploadedpic" src={post.feedpic} />
+                                        <br /><br /><br />
                                     </div>
                                 );
                             }
