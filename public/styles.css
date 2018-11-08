@@ -116,7 +116,6 @@ a {
 
 .formcontainer {
     background-color: #e9ebee;
-    height: 100vh;
 }
 
 .extrapadding {
@@ -757,6 +756,7 @@ a {
 
 .postuploadedpic {
     width: 490px;
+    border-bottom: 1px solid #365899;
 }
 
 .postmessagetext {

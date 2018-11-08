@@ -132,7 +132,7 @@ export class App extends React.Component {
 
                         <Route path='/messenger' component={Chat} />
 
-                        <Route exact path='/test' component={Feed} />
+                        <Route exact path='/' component={Feed} />
                     </div>
                 </div>
             </BrowserRouter>
