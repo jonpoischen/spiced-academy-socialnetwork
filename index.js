@@ -114,6 +114,11 @@ app.post('/login', (req, res) => {
         .catch(err => {console.log(err);});
 });
 
+app.get('/logout', (req, res) => {
+    req.session = null;
+    res.redirect('/welcome');
+});
+
 app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
     const imgUrl = s3Url + req.file.filename;
     db.uploadImages(imgUrl, req.session.userId)

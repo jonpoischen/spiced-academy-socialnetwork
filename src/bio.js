@@ -42,12 +42,13 @@ export default class Bio extends React.Component {
             });
         }
     }
-    
+
     render() {
         if(this.state.editBio == true) {
             return (
                 <div>
                     <textarea className="biotextarea" defaultValue={this.props.bio} onChange={this.handleChange}></textarea>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                     <br />
                     <button className="savebiobutton" onClick={this.handleBioSave}>Save</button>
                 </div>

@@ -81,6 +81,18 @@ export class App extends React.Component {
                             <div className="usertab">
                                 <Link to="/friends"><span>Friends</span></Link>
                             </div>
+                            <div className="usertab">
+                                <Link to="/online"><span><img src="/onlineusersicon.png" /></span></Link>
+                            </div>
+                            <div className="usertab">
+                                <Link to="/messenger"><span><img src="/messengericon.png" /></span></Link>
+                            </div>
+                            <div className="usertab">
+                                <Link to="/test"><span><img src="/notificationicon.png" /></span></Link>
+                            </div>
+                            <div className="usertab">
+                                <a href="/logout"><img src="/logouticon.png" /></a>
+                            </div>
                         </div>
                     </div>
                     {this.state.uploadStatus &&

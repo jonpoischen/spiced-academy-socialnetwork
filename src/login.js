@@ -32,7 +32,7 @@ export default class Login extends React.Component {
                 console.log(err);
             });
     }
-    
+
     render() {
         return (
             <div className="formcontainer extrapadding">
@@ -45,6 +45,7 @@ export default class Login extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <input className="emailpw2 inputfield" name="email" placeholder="Email or Phone Number" type="email" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw2 inputfield" name="password" placeholder="Password" type="password" onChange={this.handleChange} autoComplete="off" required /><br /><br />
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                             <button className="loginbutton">Log In</button>
                             <p className="fakelink">Forgot account? · Sign up for Fakebook</p>
                         </form>

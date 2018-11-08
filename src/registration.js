@@ -34,7 +34,7 @@ export default class Registration extends React.Component {
                 console.log(err);
             });
     }
-    
+
     render() {
         return (
             <div className="formcontainer">
@@ -65,6 +65,7 @@ export default class Registration extends React.Component {
                             <input className="username inputfield" placeholder="Last name" name="lastname" type="text" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw inputfield" name="email" placeholder="Mobile number or email" type="email" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw inputfield" name="password" placeholder="New password" type="password" onChange={this.handleChange} autoComplete="off" required /><br /><br />
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                             <p className="ta">By clicking Sign Up, you agree to our <span className="fakelink">Terms</span>. Learn how we collect, use and share your data in our <span className="fakelink">Data Policy</span> and how we use cookies and similar technology in our <span className="fakelink">Cookies Policy</span>. You may receive SMS Notifications from us and can opt out any time.</p>
                             <button className="submitbutton">Sign Up</button>
                         </form>
