@@ -58,7 +58,8 @@ class Feed extends React.Component {
 
         axios.post('/feed', data)
             .then(() => {
-
+                console.log("reload the feed");
+                location.reload();
             })
             .catch(err => {console.log(err);});
     }

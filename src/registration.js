@@ -61,7 +61,7 @@ export default class Registration extends React.Component {
                         {this.state.error && <div className="error">Please try again, that email might be taken</div>}
                         <br />
                         <form onSubmit={this.handleSubmit}>
-                            <input className="username inputfield" placeholder="First name" name="firstname" type="text" onChange={this.handleChange} autoComplete="off" required />
+                            <input className="username inputfield" placeholder="First name" autoFocus={true} name="firstname" type="text" onChange={this.handleChange} autoComplete="off" required />
                             <input className="username inputfield" placeholder="Last name" name="lastname" type="text" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw inputfield" name="email" placeholder="Mobile number or email" type="email" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw inputfield" name="password" placeholder="New password" type="password" onChange={this.handleChange} autoComplete="off" required /><br /><br />

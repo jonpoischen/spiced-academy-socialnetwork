@@ -43,7 +43,7 @@ export default class Login extends React.Component {
                         {this.state.error && <div className="error">Email or password is incorrect</div>}
                         <br />
                         <form onSubmit={this.handleSubmit}>
-                            <input className="emailpw2 inputfield" name="email" placeholder="Email or Phone Number" type="email" onChange={this.handleChange} autoComplete="off" required /><br /><br />
+                            <input className="emailpw2 inputfield" autoFocus={true} name="email" placeholder="Email or Phone Number" type="email" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input className="emailpw2 inputfield" name="password" placeholder="Password" type="password" onChange={this.handleChange} autoComplete="off" required /><br /><br />
                             <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                             <button className="loginbutton">Log In</button>
